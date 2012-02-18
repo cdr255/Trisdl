@@ -1,7 +1,7 @@
 OBJS = main.o
 CXX = g++
 CFLAGS = -c -Wall
-LIBS =
+LIBS = -lSDL
 LFLAGS = -Wall ${LIBS}
 
 trisdl: ${OBJS}
