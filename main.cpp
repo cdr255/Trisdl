@@ -64,25 +64,34 @@ void lf_apply_surface( int x, int y, SDL_Surface * source, SDL_Surface * destina
 int main(int argc, char *argv[]) {
 	cout << "Argument Count: " << argc << ".\n";
 
-	// Two screens: One for an image (hello) and
-	// one for the visible window (screen). Initialized
-	// these POINTERS to NULL, to be safe.
-	SDL_Surface * hello = NULL;
-	SDL_Surface * screen = NULL;
-
-	// Start ALL SDL Subsystems.
-	SDL_Init( SDL_INIT_EVERYTHING );
+	// Start ALL SDL Subsystems, with error checking.
+	if (SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
+	{
+		return -1;
+	}
 
 	// Set Up the Window where the Action will take place,
 	// using the pointer defined above for that purpose.
-	screen = SDL_SetVideoMode( 640, 480, 32, SDL_SWSURFACE );
+	screen = SDL_SetVideoMode( SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_BPP, SDL_SWSURFACE );
 
-	// Use the other pointer to load an image.
-	hello = SDL_LoadBMP( "hello.bmp" );
+	// And Check for errors with the above
+	if ( screen == NULL )
+	{
+		return -2;
+	}
 
-	// Since screen is the window, we need to draw hello onto
-	// it (Blitting).
-	SDL_BlitSurface( hello, NULL, screen, NULL );
+	// Set The Window Caption
+	SDL_WM_SetCaption( "Trisdl: An SDL *tris clone.", NULL );
+
+	// Load the Images
+	background = lf_load_image( "bg.bmp" );
+	message = lf_load_image( "msg.bmp" );
+
+	// Blit the Background 4 times, to cover the whole window.
+	lf_apply_surface( 0, 0, background, screen );
+	lf_apply_surface( 320, 0, background, screen );
+	lf_apply_surface( 0, 240, background, screen );
+	lf_apply_surface( 320, 240, background, screen );
 
 	// Now, since the screen has changed, it needs to be flipped.
 	SDL_Flip( screen );
@@ -90,8 +99,21 @@ int main(int argc, char *argv[]) {
 	// Delay, for didactic purposes. (in milliseconds)
 	SDL_Delay( 2000 );
 
-	// Now is the time for cleanup. We need to free the loaded image...
-	SDL_FreeSurface( hello );
+	// Now, Blit the Message
+	lf_apply_surface( 160, 120, message, screen );
+
+	// Now, since the screen has changed, it needs to be flipped.
+	if (SDL_Flip( screen ) == -1 )
+	{
+		return -3;
+	}
+
+	// Delay, for didactic purposes. (in milliseconds)
+	SDL_Delay( 2000 );
+
+	// Now is the time for cleanup. We need to free the loaded images...
+	SDL_FreeSurface( background );
+	SDL_FreeSurface( message );
 
 	// And Quit SDL.
 	SDL_Quit();
