@@ -25,7 +25,7 @@ SDL_Surface * lf_load_image( std::string filename ) {
 	SDL_Surface * optimized_image = NULL;
 
 	// Actually Load the Image
-	unopt_image = SDL_LoadBMP( filename.c_str() );
+	unopt_image = IMG_Load( filename.c_str() );
 
 	// Check to make sure an image was loaded
 	if ( unopt_image != NULL ) 
@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
 
 	// Load the Images
 	background = lf_load_image( "bg.bmp" );
-	message = lf_load_image( "msg.bmp" );
+	message = lf_load_image( "msg.png" );
 
 	// Blit the Background 4 times, to cover the whole window.
 	lf_apply_surface( 0, 0, background, screen );
