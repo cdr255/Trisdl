@@ -62,6 +62,7 @@ void lf_apply_surface( int x, int y, SDL_Surface * source, SDL_Surface * destina
 }
 
 int main(int argc, char *argv[]) {
+	bool quit = false;
 	cout << "Argument Count: " << argc << ".\n";
 
 	// Start ALL SDL Subsystems, with error checking.
@@ -108,8 +109,24 @@ int main(int argc, char *argv[]) {
 		return -3;
 	}
 
-	// Delay, for didactic purposes. (in milliseconds)
-	SDL_Delay( 2000 );
+	while ( quit == false ) 
+	{
+		SDL_Event event;
+		while ( SDL_PollEvent( &event ) )
+		{
+			if ( event.type == SDL_QUIT )
+				quit = true;
+			if ( event.type == SDL_KEYDOWN )
+			{
+				switch( event.key.keysym.sym )
+				{
+					case SDLK_ESCAPE:
+						quit = true;
+						break;
+				}
+			}
+		}
+	}
 
 	// Now is the time for cleanup. We need to free the loaded images...
 	SDL_FreeSurface( background );
