@@ -28,6 +28,9 @@ bool SURGE_init();
 // Declare the Loading function
 bool SURGE_load();
 
+// Declare the Cleanup function
+void SURGE_clean();
+
 
 // LazyFoo's Function for loading optimized images.
 

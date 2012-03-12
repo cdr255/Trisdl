@@ -53,13 +53,7 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	// Now is the time for cleanup. We need to free the loaded images...
-	SDL_FreeSurface( background );
-	SDL_FreeSurface( message );
-
-	// And Quit SDL.
-	SDL_Quit();
-
+	SURGE_clean();
 
 	return 0;
 }

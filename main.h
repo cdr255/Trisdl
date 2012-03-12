@@ -42,6 +42,7 @@ bool SURGE_init() {
 	return true;
 }
 
+// Define the Loading Function
 bool SURGE_load() {
 
 	// Load the Images
@@ -65,6 +66,21 @@ bool SURGE_load() {
 	return true;
 }
 
+// Define the Cleanup Function
+void SURGE_clean() {
+
+	// Free All Surfaces
+	SDL_FreeSurface( background );
+	SDL_FreeSurface( msg );
+	SDL_FreeSurface( message );
+
+	// Close Font
+	TTF_CloseFont( font );
+
+	// Quit TTF and SDL
+	TTF_Quit();
+	SDL_Quit();
+}
 
 
 #endif
