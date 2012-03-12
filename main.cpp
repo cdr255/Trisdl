@@ -12,7 +12,7 @@ SDL_Surface * message = NULL;
 int main(int argc, char *argv[]) {
 	bool quit = false;
 	cout << "Argument Count: " << argc << ".\n";
-	init();
+	SURGE_init();
 
 	// Load the Images
 	background = lf_load_image( "bg.bmp" );

@@ -17,7 +17,7 @@
 SDL_Surface * screen = NULL;
 
 // Declare the Initialization function
-bool init();
+bool SURGE_init();
 
 // LazyFoo's Function for loading optimized images.
 

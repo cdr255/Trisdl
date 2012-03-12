@@ -8,7 +8,7 @@ const int SCREEN_HEIGHT = 480;
 const int SCREEN_BPP = 32;
 
 // Define the Initialization function
-bool init() {
+bool SURGE_init() {
 	
 	// Initialize all SDL Subsystems
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
