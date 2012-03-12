@@ -2,21 +2,11 @@
 using namespace std;
 
 
-// Three Screens: One for an image (background), one
-// for a message (message) and one for the visible 
-// window (screen). Initialized these POINTERS to 
-// NULL, just to be safe.
-SDL_Surface * background = NULL;
-SDL_Surface * message = NULL;
-
 int main(int argc, char *argv[]) {
 	bool quit = false;
 	cout << "Argument Count: " << argc << ".\n";
 	SURGE_init();
-
-	// Load the Images
-	background = lf_load_image( "bg.bmp" );
-	message = lf_load_image( "msg.png" );
+	SURGE_load();
 
 	// Blit the Background 4 times, to cover the whole window.
 	lf_apply_surface( 0, 0, background, screen );
@@ -30,8 +20,11 @@ int main(int argc, char *argv[]) {
 	// Delay, for didactic purposes. (in milliseconds)
 	SDL_Delay( 2000 );
 
-	// Now, Blit the Message
-	lf_apply_surface( 160, 120, message, screen );
+	message = TTF_RenderText_Solid(font, "This is a test.", textcolor);
+
+	// Now, Blit the Messages
+	lf_apply_surface( 160, 120, msg, screen );
+	lf_apply_surface( 180, 140, message, screen );
 
 	// Now, since the screen has changed, it needs to be flipped.
 	if (SDL_Flip( screen ) == -1 )

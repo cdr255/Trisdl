@@ -13,11 +13,21 @@
 
 // VARIABLES
 
-// This is the window of SURGE.
+// This is the window in SURGE.
 SDL_Surface * screen = NULL;
+
+// All games need some kind of text. This is the MAIN font.
+TTF_Font * font = NULL;
+
+// In SURGE, the default text color is WHITE.
+SDL_Color textcolor = {255, 255, 255};
 
 // Declare the Initialization function
 bool SURGE_init();
+
+// Declare the Loading function
+bool SURGE_load();
+
 
 // LazyFoo's Function for loading optimized images.
 

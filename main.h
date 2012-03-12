@@ -7,6 +7,16 @@ const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 const int SCREEN_BPP = 32;
 
+
+// Two Screens: One for an image (background), one
+// for a message (message). Initialized these POINTERS to 
+// NULL, just to be safe.
+SDL_Surface * background = NULL;
+SDL_Surface * msg = NULL;
+SDL_Surface * message = NULL;
+
+
+
 // Define the Initialization function
 bool SURGE_init() {
 	
@@ -31,5 +41,30 @@ bool SURGE_init() {
 	// If All Went Well
 	return true;
 }
+
+bool SURGE_load() {
+
+	// Load the Images
+	background = lf_load_image( "bg.bmp" );
+	msg = lf_load_image( "msg.png" );
+
+	// Load the Font
+	font = TTF_OpenFont( "trisdl.ttf", 28 );
+
+	//Checks
+	if (background == NULL)
+		return false;
+
+	if (message == NULL)
+		return false;
+
+	if (font == NULL)
+		return false;
+
+	// If all Went Well
+	return true;
+}
+
+
 
 #endif
