@@ -7,7 +7,7 @@ LFLAGS = -Wall ${LIBS}
 trisdl: ${OBJS}
 	${CXX} ${LFLAGS} ${OBJS} -o trisdl
 
-main.o: main.cpp main.h
+main.o: main.cpp main.h SURGE.h
 	${CXX} ${CFLAGS} main.cpp -o main.o
 
 clean:
