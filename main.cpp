@@ -123,6 +123,8 @@ int main(int argc, char *argv[]) {
 					case SDLK_ESCAPE:
 						quit = true;
 						break;
+					default:
+						break;
 				}
 			}
 		}
